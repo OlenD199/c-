@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <string.h>
+
+//结构体：面对复杂对象
+
+//创建一个结构体指针
+struct Book  //假设创建一个书，结构体包含书的信息
+{
+	char name[20];//书名
+	short price;//价格
+};
+
+void test1()
+{
+	//利用结构体类型 - 创建一个该类型的结构体变量
+	struct Book b1 = { "c语言程序设计",55 };
+	//打印出该结构体变量的相关信息
+	printf("书名:%s\n", b1.name);
+	printf("价格:%d元\n", b1.price);
+	//结构体变量的相关值可以改变
+	b1.price = 15;//price是一个变量，所以可以直接赋值
+	//name[]是一个字符数组，其中name表示一个地址，所以不能用直接赋值的方式，而要用strcpy函数
+	strcpy(b1.name, "C++程序设计");
+	printf("更改后书名:%s\n", b1.name);
+	printf("更改后价格:%d元\n", b1.price);
+	printf("\n");
+}
+
+void test2()
+{
+	//利用指针使用结构体
+	struct Book b1 = { "c语言程序设计",55 };
+	//使用指针定义结构体
+	struct Book* pb1 = &b1;
+	//两种使用方法：
+	//方法1：
+	printf("书名:%s\n",(*pb1).name );
+	printf("价格:%d元\n", (*pb1).price);
+	printf("\n");
+	//方法2：
+	printf("书名:%s\n", pb1->name);
+	printf("价格:%d元\n", pb1->price);
+	//  结构体变量.成员
+	//  结构体指针->成员
+
+	//结构体指针改变信息
+	strcpy(pb1->name,"C++程序设计");
+	pb1->price = 15;
+	printf("更改后书名:%s\n", b1.name);
+	printf("更改后价格:%d元\n", b1.price);
+	printf("\n");
+
+}
+
+int main()
+{
+	test1();
+	test2();
+
+	return 0;
+}

@@ -1,0 +1,138 @@
+#include<stdio.h>
+
+void test1()
+{
+	int n = 1;
+	int m = 2;
+	switch (n)
+	{
+	case 1:m++;
+	case 2:n++;
+	case 3:
+		switch (n)
+		{//switch允许嵌套使用，switch中还可以使用if语句
+		case 1:n++;
+		case 2:m++; n++; break;
+		}
+	case 4:m++;
+		break;
+	default:
+		break;
+	}
+	printf("m = %d, n = %d\n", m, n);
+
+}
+
+void test2()
+{
+	char ch = 0;
+	//输入多少字符，输出多少字符（包括空格）
+	//遇到ctrl+z 后结束
+	//EOF - end of file
+	while ((ch = getchar()) != EOF)
+	{
+		putchar(ch);
+	}
+}
+
+void test3()
+{
+	int ret = 0;
+	char password[20];
+	printf("请输入密码：\n");
+	scanf("%s", password);
+	//scanf为输入函数，将输入的所有东西拿到缓冲区中，
+	//代码运行时，一共输入了123456\n,(密码以123456为例)，输入到缓冲区时，共123456\n
+	//而password拿去了123456，缓冲区中还剩下\n
+	printf("是否确认（Y/N）:\n");
+	ret = getchar();
+	//缓冲区中还有\n,所以ret会得到\n,而不会执行ret = getchar()
+	//缓冲区如果没有东西的话，就会等待执行ret = getchar()
+	//判断时就会判断为\n,而不是Y
+	if ('Y' == ret)
+	{
+		printf("确认成功\n");
+	}
+	else
+	{
+		printf("取消确认\n"); 
+	}
+	//解决方法见test4;
+}
+
+void test4()
+{
+	int ret = 0;
+	int ch = 0;
+	char password[20];
+	printf("请输入密码：\n");
+	scanf("%s", password);
+	//getchar();  若输入时有空格，后面还有输入时，仍然无法运行成功,如123456 ABCD
+	while ((ch = getchar()) != '\n')
+	{
+		;
+	}
+
+	printf("是否确认（Y/N）:\n");
+	ret = getchar();
+	if ('Y' == ret)
+	{
+		printf("确认成功\n");
+	}
+	else
+	{
+		printf("取消确认\n"); 
+	}
+}
+
+void test5()
+{
+	int ch = 0;
+	while ((ch = getchar()) != EOF)
+	{
+		//输入ctrl+z已结束循环
+		if (ch < '0' || ch>'9')
+			continue;
+		putchar(ch);
+	}
+}
+
+void test6()
+{
+	int i = 0;
+	int j = 0;
+	for (; i < 10; i++)//使用for循环时，建议使用左闭右开，即i<10, 而不是i<=9
+	{
+		for (; j < 10; j++)
+			printf("haha\n");
+	}
+	printf("\n");
+	int x = 0;
+	int y = 0;
+	for (x = 0, y = 0; x < 2 && x < 5; ++x, y++)
+	{
+		printf("hehe\n");
+	}
+}
+
+void test7()
+{
+	//试问该循环进行了多少次？
+	int i = 0;
+	int k = 0;
+	for (i = 0, k = 0; k = 0; i++, k++)//第一次循环时，进行到循环判断时，k=0，给k赋值为0，该表达式的结果是0，为假，所以循环0次
+		k++;															//如果赋值为其他值，则该表达式的结果为1，死循环
+
+}
+
+int main()
+{
+	test1();
+	test2();
+	test3();
+	test4();
+	test5();
+	test6();
+	test7();
+	return 0;
+}

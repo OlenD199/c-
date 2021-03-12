@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+//goto 语句  可以从一个语句到另外一个语句
+int main()
+{
+again:
+	printf("hello world\n");
+	goto again;
+
+	return 0;
+}
+
+int main()
+{
+	printf("hello world!\n");
+	goto again;					//会跳到again，不会打印 hehe
+	printf("hehe\n");
+again:
+	printf("haha\n");
+
+	return 0;
+}
+
+
+//利用 goto 语句设计一个关机程序
+//int main()
+//{
+//	char input[20] = { 0 };
+//	//shutdown -s -t 60  ,表示电脑会在六十秒内关机
+//	//system()，表示执行系统命令
+//	system("shutdown -s -t 120");
+//again:
+//	printf("请注意，你的电脑将在120秒内关机,请输入 “ 羞答答的玫瑰静悄悄的开”  ，以避免关机\n");
+//	printf("请输入：");
+//	scanf("%s", input);
+//	if (0 == strcmp(input, "羞答答的玫瑰静悄悄的开"))
+//	{
+//		system("shutdown -a");
+//		printf("已取消关机\n");
+//	}
+//	else
+//	{
+//		goto again;
+//	}
+//
+//	return 0;
+//}
